@@ -1,0 +1,14 @@
+#########################################
+####### UNREAL GENERATED FILES ##########
+#########################################
+*/Build
+*/Binaries
+*/DerivedDataCache
+*/Intermediate
+*/Saved
+EscapeGame/Content/StarterContent/
+
+#########################################
+######### VS GENERATED FILES ############
+#########################################
+*.VC.db

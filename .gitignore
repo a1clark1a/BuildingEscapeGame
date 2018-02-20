@@ -12,3 +12,4 @@ EscapeGame/Content/StarterContent/
 ######### VS GENERATED FILES ############
 #########################################
 *.VC.db
+*.suo

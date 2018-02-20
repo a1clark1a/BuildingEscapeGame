@@ -1,6 +1,7 @@
 // Copyright PerfectoGames 2018
 
 #include "OpenDoor.h"
+#include "Engine/World.h"
 #include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
@@ -19,10 +20,7 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 
-	//Find the owning object
-	AActor* Owner = GetOwner();
-	FRotator newRotation = FRotator(0.0f,-90.0f,0.0f);
-	Owner->SetActorRotation(newRotation);
+	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 
@@ -31,6 +29,19 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+	// Poll the trigger
+	if (PressurePlate->IsOverlappingActor(ActorThatOpens))
+	{
+		// If the actorThatOpens is in the volume
+		OpenDoor();
+	}
+
 }
 
+void UOpenDoor::OpenDoor()
+{
+	//Find the owning object
+	AActor* Owner = GetOwner();
+	FRotator newRotation = FRotator(0.0f, 90.0f, 0.0f);
+	Owner->SetActorRotation(newRotation);
+}

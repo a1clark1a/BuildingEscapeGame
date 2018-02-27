@@ -1,7 +1,6 @@
 // Copyright PerfectoGames 2018
 
 #include "Grabber.h"
-#include "CoreMinimal.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 
@@ -39,7 +38,11 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewRotation);
 	UE_LOG(LogTemp, Warning, TEXT("PlayerViewPoint is %s and PlayerViewRotation is %s"), *PlayerViewPointLocation.ToString(), *PlayerViewRotation.ToString());
 	// Ray-cast out to reach distance
-
+	;
+	FVector LineTraceDirection = PlayerViewRotation.Vector() * Reach;
+	FVector LineTraceEnd = PlayerViewPointLocation + LineTraceDirection;
+	//Draw a red trace in the world to visualize
+	DrawDebugLine(GetWorld(), PlayerViewPointLocation, LineTraceEnd, FColor(255, 0, 0), false, 0.0f, 0, 10.0f);
 	// See what we hit
 }
 

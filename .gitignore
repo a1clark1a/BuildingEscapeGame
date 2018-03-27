@@ -7,11 +7,11 @@
 */Intermediate
 */Saved
 EscapeGame/Content/StarterContent
-
+*/.vs
 
 #########################################
 ######### VS GENERATED FILES ############
 #########################################
 *.VC.db
 *.suo
-*.vs
+

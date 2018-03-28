@@ -14,7 +14,7 @@ class ESCAPEGAME_API UGrabber : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UGrabber();
 
@@ -22,16 +22,28 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 private:
 	float Reach = 100.0f;
-	
+
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
-	
+
+	//Find attached physics handle
+	void FindPhysicsComponent();
+
+	//Setup input componenet
+	void InputController();
+
 	//Ray-cast and grab what's in reach
 	void Grab();
+
+	//Release attach object from grabber physics
+	void Released();
+
+	//Return hit for first physics body in reach
+	const FHitResult GetFirstPhysicsBodyInReach();
 };

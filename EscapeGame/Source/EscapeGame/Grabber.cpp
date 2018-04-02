@@ -67,14 +67,14 @@ void UGrabber::Grab()
 	//attach physics handle
 	if (ActorHit)
 	{
-		PhysicsHandle->GrabComponentAtLocation(ComponentToGrab, NAME_None,ActorHit->GetActorLocation());
+		PhysicsHandle->GrabComponentAtLocationWithRotation(ComponentToGrab, NAME_None, ActorHit->GetActorLocation(),FRotator(0));
 	};
 }
 
 void UGrabber::Released()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Grab Released"));
-	//TODO Release physics handle
+	PhysicsHandle->ReleaseComponent();
 
 }
 
@@ -88,10 +88,10 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 	GetWorld()->GetFirstPlayerController()->GetPlayerViewPoint(OUT PlayerViewPointLocation, OUT PlayerViewRotation);
 	FVector LineTraceEnd = PlayerViewPointLocation + PlayerViewRotation.Vector() * Reach;
 
-	//If the physics handle is attacged
-	if (PhysicsHandle->GrabComponentAtLocation)
-		//move the object that we're holding
+	//If the physics handle is attached
+	if (PhysicsHandle->GrabbedComponent)
 	{
+		//move the object that we're holding
 		PhysicsHandle->SetTargetLocation(LineTraceEnd);
 	}
 }

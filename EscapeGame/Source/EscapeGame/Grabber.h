@@ -33,6 +33,9 @@ private:
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 	UInputComponent* InputComponent = nullptr;
 
+	FVector PlayerViewPointLocation;
+	FRotator PlayerViewRotation;
+
 	//Find attached physics handle
 	void FindPhysicsComponent();
 
@@ -47,4 +50,7 @@ private:
 
 	//Return hit for first physics body in reach
 	const FHitResult GetFirstPhysicsBodyInReach();
+
+	//Returns a players current end of reach line
+	const FVector LineTraceEnd();
 };

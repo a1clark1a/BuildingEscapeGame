@@ -3,7 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DrawDebugHelpers.h"
 #include "Components/ActorComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/TriggerVolume.h"
 #include "OpenDoor.generated.h"
 
@@ -25,6 +27,8 @@ protected:
 	void OpenDoor();
 	void CloseDoor();
 
+	
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
@@ -43,4 +47,8 @@ private:
 	float DoorCloseDelay = 1.0f;
 
 	float LastDoorOpenTime;
+
+
+	//Returns total mass
+	float GetTotalMassOfActorsOnPlate();
 };

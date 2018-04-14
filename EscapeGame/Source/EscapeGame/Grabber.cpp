@@ -28,7 +28,9 @@ void UGrabber::FindPhysicsComponent()
 	if (PhysicsHandle == nullptr)
 	{
 		UE_LOG(LogTemp, Error, TEXT("No Physics handle %s"), *GetOwner()->GetName());
+		return;
 	}
+	
 }
 
 //Function to handle player controller
@@ -58,12 +60,14 @@ void UGrabber::Grab()
 	// if we hit something then attach a physics handle
 	if (ActorHit)
 	{
+		if (!PhysicsHandle) { return; }
 		PhysicsHandle->GrabComponentAtLocationWithRotation(ComponentToGrab, NAME_None, ActorHit->GetActorLocation(),ActorHit->GetActorRotation());
 	};
 }
 
 void UGrabber::Released()
 {
+	if (!PhysicsHandle) { return; }
 	UE_LOG(LogTemp, Warning, TEXT("Grab Released"));
 	PhysicsHandle->ReleaseComponent();
 }
@@ -73,6 +77,7 @@ void UGrabber::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompone
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	if (!PhysicsHandle) { return; }
 	//If the physics handle is attached
 	if (PhysicsHandle->GrabbedComponent)
 	{
